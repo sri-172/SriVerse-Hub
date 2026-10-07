@@ -1,21 +1,24 @@
 # SriVerse Hub
 
-**One Place. Everything SriVerse.**
+Premium master portal for the SriVerse ecosystem.
 
-A premium master portal for the SriVerse ecosystem.
-
-## Current foundation
+## Public site
 - Premium responsive landing page
-- Category-based ecosystem navigation
+- Ecosystem categories
 - Featured projects
-- Searchable/filterable link directory
-- SEO metadata, canonical URL, robots.txt and sitemap
-- Structured link data in `app.js), ready to move to a CMS/database
+- Search/filter directory
+- SEO metadata, robots.txt and sitemap
 
-## Planned CMS
-The next architecture layer can add a protected admin dashboard where websites/projects/resources can be added, edited, featured, categorized and removed without changing the public UI.
+## Admin foundation
+Open `admin.html` to use the destination editor.
+- Add, edit and delete destinations
+- Categories, icons, descriptions and URLs
+- Featured/live status
+- Search
+- Noindex admin page
 
-## GitHub Pages
-Enable **Settings → Pages → Deploy from branch → main → /(root)**.
+### Important
+The current admin uses browser localStorage. This is intentionally a frontend CMS prototype; changes are stored in the current browser only and do not yet publish to GitHub or a shared database.
 
-Repository: https://github.com/sri-172/SriVerse-Hub
+## Next production CMS step
+Connect the editor to a persistent backend such as Supabase with authenticated admin access, then load public destinations from that database.
