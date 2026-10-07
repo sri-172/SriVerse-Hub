@@ -27,6 +27,7 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      # Publish the complete repository as the Pages artifact.
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
