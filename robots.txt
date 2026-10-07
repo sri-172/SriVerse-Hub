@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://sri-172.github.io/SriVerse-Hub/sitemap.xml
