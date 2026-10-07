@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>SriVerse Hub — Admin</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="admin.css"></head>
+<body class="admin-body"><main class="admin-shell">
+<header class="admin-top"><a class="brand" href="index.html"><span class="brand-mark">S</span><span>SriVerse <b>Hub</b></span></a><span class="admin-label">CONTROL CENTER</span><a class="back" href="index.html">← Public site</a></header>
+<section class="admin-hero"><div><div class="eyebrow">SRIVERSE HUB / ADMIN</div><h1>Manage your <em>digital universe.</em></h1><p>Add and organize websites, projects, resources and social destinations from one clean workspace.</p></div><button class="primary" id="newBtn">＋ Add destination</button></section>
+<section class="stats"><div><b id="total">0</b><span>Total destinations</span></div><div><b id="featured">0</b><span>Featured</span></div><div><b id="live">0</b><span>Live</span></div></section>
+<section class="admin-panel"><div class="panel-head"><div><h2>Destinations</h2><span id="status">Local workspace</span></div><input id="adminSearch" placeholder="Search destinations…"></div><div id="adminList"></div></section>
+<div class="modal" id="modal" hidden><div class="modal-card"><button class="close" id="close">×</button><div class="eyebrow">DESTINATION EDITOR</div><h2 id="modalTitle">Add destination</h2><form id="form">
+<label>Name<input id="fTitle" required maxlength="80"></label>
+<label>Description<textarea id="fDesc" required maxlength="180"></textarea></label>
+<label>URL<input id="fUrl" type="url" placeholder="https://example.com" required></label>
+<div class="two"><label>Category<select id="fCategory"><option>AI</option><option>Education</option><option>Media</option><option>Projects</option><option>Community</option><option>Resources</option></select></label><label>Icon<input id="fIcon" maxlength="4" placeholder="✦"></label></div>
+<div class="checks"><label><input id="fFeatured" type="checkbox"> Featured</label><label><input id="fLive" type="checkbox" checked> Live</label></div>
+<div class="form-actions"><button type="button" class="secondary" id="cancel">Cancel</button><button class="primary" type="submit">Save destination</button></div>
+</form></div></div>
+</main><script src="admin.js"></script></body></html>
