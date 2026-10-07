@@ -1,0 +1,7 @@
+{
+  "site": {"name":"SriVerse Hub","tagline":"One Place. Everything SriVerse."},
+  "destinations": [
+    {"id":"ai","title":"SriVerse Master AI","category":"AI","featured":true,"live":true},
+    {"id":"temple","title":"Veda Maatha Gayatri Devi Temple","category":"Community","featured":true,"live":true}
+  ]
+}
