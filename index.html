@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070812">
+<meta name="description" content="SriVerse Hub — One Place. Everything SriVerse. Explore AI, education, media, projects, websites and resources.">
+<link rel="canonical" href="https://sri-172.github.io/SriVerse-Hub/">
+<meta property="og:title" content="SriVerse Hub — One Place. Everything SriVerse.">
+<meta property="og:description" content="The central digital home for the SriVerse ecosystem.">
+<meta property="og:type" content="website">
+<title>SriVerse Hub — One Place. Everything SriVerse.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+<header class="nav">
+  <a class="brand" href="#top" aria-label="SriVerse Hub home"><span class="brand-mark">S</span><span>SriVerse <b>Hub</b></span></a>
+  <nav class="nav-links" aria-label="Main navigation">
+    <a href="#universe">Universe</a><a href="#projects">Projects</a><a href="#links">All Links</a><a href="#about">About</a>
+  </nav>
+  <a class="nav-cta" href="#links">Explore <span>↗</span></a>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+  <div class="eyebrow"><span class="pulse"></span> THE SRIVERSE ECOSYSTEM</div>
+  <h1>One Place.<br><span>Everything SriVerse.</span></h1>
+  <p class="hero-copy">A premium digital home for AI, education, media, projects, websites and everything being built under the SriVerse vision.</p>
+  <div class="hero-actions"><a class="primary" href="#universe">Explore SriVerse <span>↗</span></a><a class="secondary" href="#about">Discover the vision</a></div>
+  <div class="hero-meta"><span>✦ AI</span><span>✦ LEARN</span><span>✦ CREATE</span><span>✦ SHARE</span></div>
+</section>
+
+<section class="section" id="universe">
+  <div class="section-head"><div><div class="eyebrow">01 / UNIVERSE</div><h2>Explore the <em>ecosystem.</em></h2></div><p>Everything organized into focused spaces, so visitors can find the right destination instantly.</p></div>
+  <div class="category-grid" id="categoryGrid"></div>
+</section>
+
+<section class="section featured-section" id="projects">
+  <div class="section-head"><div><div class="eyebrow">02 / FEATURED</div><h2>Built to <em>stand out.</em></h2></div><p>Your most important digital creations get a dedicated premium presentation.</p></div>
+  <div class="featured-grid" id="featuredGrid"></div>
+</section>
+
+<section class="section directory-section" id="links">
+  <div class="section-head"><div><div class="eyebrow">03 / DIRECTORY</div><h2>Everything, <em>within reach.</em></h2></div><p>Search and filter the complete SriVerse collection.</p></div>
+  <div class="directory-toolbar"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="Search websites, projects and resources..." aria-label="Search SriVerse links"></label><div class="filters" id="filters"></div></div>
+  <div class="link-grid" id="linkGrid"></div>
+  <div class="empty" id="emptyState" hidden>No matching SriVerse destinations found.</div>
+</section>
+
+<section class="section about" id="about">
+  <div class="about-card"><div class="eyebrow">04 / THE VISION</div><h2>More than a<br><em>collection of links.</em></h2><p>SriVerse Hub is the central digital home for an evolving ecosystem of technology, education, creativity, media and community projects.</p><div class="manifesto"><span>AI</span><i>→</i><span>LEARN</span><i>→</i><span>CREATE</span><i>→</i><span>SHARE</span></div></div>
+</section>
+</main>
+
+<footer id="footer"><div class="footer-brand"><span class="brand-mark">S</span><div><strong>SriVerse Hub</strong><small>One Place. Everything SriVerse.</small></div></div><div class="footer-links"><a href="#universe">Universe</a><a href="#projects">Projects</a><a href="#links">All Links</a><a href="#about">About</a></div><p>© <span id="year"></span> SriVerse Hub</p></footer>
+<script src="app.js"></script>
+</body>
+</html>
