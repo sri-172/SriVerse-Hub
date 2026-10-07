@@ -39,18 +39,53 @@ function githubRepoToLink(repo){
   };
 }
 
+async function fetchGitHubRepos(){
+  const cacheKey="sriverse-hub-github-repos-v2";
+  const cached=(()=>{try{return JSON.parse(localStorage.getItem(cacheKey)||"null")}catch{return null}})();
+  const pages=[];
+  for(let page=1;page<=10;page++){
+    let response=null;
+    for(let attempt=0;attempt<3;attempt++){
+      try{
+        response=await fetch(`https://api.github.com/users/${encodeURIComponent(GITHUB_OWNER)}/repos?per_page=100&page=${page}&sort=updated&type=owner`,{
+          headers:{"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2026-03-10"},
+          cache:"no-store"
+        });
+        if(response.ok)break;
+        if(![403,429,500,502,503,504].includes(response.status))break;
+      }catch(e){}
+      await new Promise(resolve=>setTimeout(resolve,700*(attempt+1)));
+    }
+    if(!response?.ok)break;
+    const batch=await response.json();
+    if(!Array.isArray(batch)||!batch.length)break;
+    pages.push(...batch);
+    if(batch.length<100)break;
+  }
+  if(pages.length){
+    try{localStorage.setItem(cacheKey,JSON.stringify({savedAt:Date.now(),repos:pages}))}catch{}
+    return pages;
+  }
+  return Array.isArray(cached?.repos)?cached.repos:[];
+}
+
 async function loadGitHubProjects(){
   try{
-    const response=await fetch("https://api.github.com/users/"+encodeURIComponent(GITHUB_OWNER)+"/repos?per_page=100&sort=updated&type=owner",{headers:{"Accept":"application/vnd.github+json"}});
-    if(!response.ok)throw new Error("GitHub API "+response.status);
-    const repos=await response.json();
+    const repos=await fetchGitHubRepos();
     const existingUrls=new Set(links.map(x=>x.url).filter(Boolean));
+    const existingSlugs=new Set(links.map(x=>String(x.slug||"").toLowerCase()).filter(Boolean));
     const auto=repos
-      .filter(repo=>!repo.fork&&!repo.archived&&!GITHUB_EXCLUDE.includes(repo.name)&&!existingUrls.has(repo.html_url))
-      .map(githubRepoToLink);
+      .filter(repo=>repo&&repo.visibility==="public"&&!repo.fork&&!repo.archived&&!repo.disabled&&!GITHUB_EXCLUDE.includes(repo.name)&&!(repo.topics||[]).includes("sriverse-hidden"))
+      .map(githubRepoToLink)
+      .filter(repo=>!existingUrls.has(repo.url)&&!existingSlugs.has(repo.slug.toLowerCase()));
     links=[...links,...auto];
-  }catch(error){console.warn("SriVerse Hub could not auto-load GitHub projects.",error)}
+    window.__sriverseGithubSync={count:auto.length,total:repos.length,at:new Date().toISOString(),ok:true};
+  }catch(error){
+    console.warn("SriVerse Hub GitHub synchronization unavailable.",error);
+    window.__sriverseGithubSync={count:0,total:0,at:new Date().toISOString(),ok:false};
+  }
 }
+
 
 async function loadLinks(){
   try{
