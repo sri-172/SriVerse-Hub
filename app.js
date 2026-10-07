@@ -125,3 +125,6 @@ function renderLinks(category="All",query=""){
 search.addEventListener("input",()=>renderLinks(document.querySelector(".filter.active")?.dataset.filter||"All",search.value));
 document.querySelector("#year").textContent=new Date().getFullYear();
 loadLinks();
+const refreshGitHubSync=async()=>{await loadGitHubProjects();renderCategories();renderFeatured();renderFilters();renderLinks(document.querySelector(".filter.active")?.dataset.filter||"All",search.value)};
+setInterval(refreshGitHubSync,5*60*1000);
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")refreshGitHubSync()});
