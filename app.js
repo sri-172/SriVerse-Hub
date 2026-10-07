@@ -18,7 +18,7 @@ async function loadLinks(){
     const db=createClient(SUPABASE_URL,SUPABASE_KEY);
     const {data,error}=await db.from("destinations").select("*").eq("live",true).order("sort_order",{ascending:true}).order("created_at",{ascending:true});
     if(error) throw error;
-    links=Array.isArray(data)?data:[];
+    links=(Array.isArray(data)?data:[]).filter(x=>!["sriverse-github-projects","rega_village_quiz_competition_custom_subjects"].includes(x.slug));
   }catch(error){console.warn("SriVerse Hub CMS unavailable.",error);links=[]}
   renderCategories();renderFeatured();renderFilters();renderLinks();
 }
