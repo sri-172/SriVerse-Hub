@@ -20,6 +20,12 @@ function classifyGitHubRepo(repo){
   return"Projects";
 }
 
+function websiteUrl(repo){
+  if(repo.homepage&&/^https?:\\/\\//i.test(repo.homepage))return repo.homepage.replace(/\\/$/,"");
+  if(/\\.html$/i.test(repo.name))return `https://${GITHUB_OWNER}.github.io/${encodeURIComponent(repo.name.replace(/\\.html$/i,""))}/`;
+  return repo.html_url;
+}
+
 function githubRepoToLink(repo){
   const category=classifyGitHubRepo(repo);
   const topics=repo.topics||[];
@@ -31,7 +37,7 @@ function githubRepoToLink(repo){
     description:repo.description||"SriVerse GitHub project.",
     category,
     icon:iconByCategory[category],
-    url:repo.html_url,
+    url:websiteUrl(repo),
     featured,
     live:true,
     source:"github",
@@ -106,7 +112,7 @@ function renderFeatured(){
   const curated=links.filter(x=>x.featured&&x.live);
   const auto=links.filter(x=>x.source==="github"&&x.featured);
   const f=[...curated,...auto];
-  featuredGrid.innerHTML=f.map((x,i)=>`<article class="project ${i===0?"large":""}"><div class="topline"><span>${x.icon||iconByCategory[x.category]||"✦"} &nbsp; ${x.source==="github"?"GITHUB PROJECT":"FEATURED PROJECT"}</span><span>0${i+1}</span></div><h3>${x.title}</h3><p>${x.description}</p><a class="launch" href="${projectHref(x)}" target="_self" rel="${x.source==="github"?"noopener":""}">${x.source==="github"?"Open GitHub ↗":"View project ↗"}</a><span class="orb"></span></article>`).join("");
+  featuredGrid.innerHTML=f.map((x,i)=>`<article class="project ${i===0?"large":""}"><div class="topline"><span>${x.icon||iconByCategory[x.category]||"✦"} &nbsp; ${x.source==="github"?"GITHUB PROJECT":"FEATURED PROJECT"}</span><span>0${i+1}</span></div><h3>${x.title}</h3><p>${x.description}</p><a class="launch" href="${projectHref(x)}" target="_self" rel="${x.source==="github"?"noopener":""}">${x.source==="github"?"Open Website ↗":"View project ↗"}</a><span class="orb"></span></article>`).join("");
 }
 
 function renderFilters(){
@@ -118,7 +124,7 @@ function renderFilters(){
 function renderLinks(category="All",query=""){
   const q=query.trim().toLowerCase();
   const list=links.filter(x=>(category==="All"||x.category===category)&&(!q||[x.title,x.description,x.category].join(" ").toLowerCase().includes(q)));
-  linkGrid.innerHTML=list.map(x=>`<a class="link-card" href="${projectHref(x)}" target="_self" rel="${x.source==="github"?"noopener":""}"><span class="link-icon">${x.icon||iconByCategory[x.category]||"✦"}</span><span class="link-copy"><span class="card-category">${x.category}${x.source==="github"?" · GitHub":""}</span><h3>${x.title}</h3><p>${x.description}</p></span><span class="go">↗</span></a>`).join("");
+  linkGrid.innerHTML=list.map(x=>`<a class="link-card" href="${projectHref(x)}" target="_self" rel="${x.source==="github"?"noopener":""}"><span class="link-icon">${x.icon||iconByCategory[x.category]||"✦"}</span><span class="link-copy"><span class="card-category">${x.category}${x.source==="github"?" · Website":""}</span><h3>${x.title}</h3><p>${x.description}</p></span><span class="go">↗</span></a>`).join("");
   empty.hidden=list.length>0;
 }
 
