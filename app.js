@@ -1,13 +1,15 @@
 const SUPABASE_URL="https://jixzylyukugyixtodqec.supabase.co";
 const SUPABASE_KEY="sb_publishable_rCQZskarlFNj4D5cdne_Rw_QDXX4wcB";
 const GITHUB_OWNER="sri-172";
-const GITHUB_EXCLUDE=["SriVerse-Hub"];
+const GITHUB_EXCLUDE=["SriVerse-Hub"];const GITHUB_CATEGORY_TOPICS={"sriverse-ai":"AI","sriverse-education":"Education","sriverse-media":"Media","sriverse-projects":"Projects","sriverse-community":"Community","sriverse-resources":"Resources"};
 const iconByCategory={AI:"✦",Education:"◇",Media:"▶",Projects:"⌘",Community:"◎",Resources:"▱"};
 const fallbackLinks=[{id:"temple",title:"Veda Maatha Gayatri Devi Temple",description:"Digital temple information and community project.",category:"Community",icon:"ॐ",url:"https://sri-172.github.io/veda-maatha-gayatri-devi-temple/",featured:true,live:true},{id:"youtube",title:"SriVerse Telugu",description:"Telugu podcasts, ideas and conversations.",category:"Media",icon:"▶",url:"#",featured:false,live:false},{id:"github",title:"SriVerse GitHub Projects",description:"Open-source experiments and digital creations.",category:"Projects",icon:"⌘",url:"https://github.com/sri-172",featured:false,live:true},{id:"learn",title:"SriVerse Learn",description:"A future home for education and knowledge resources.",category:"Education",icon:"◇",url:"#",featured:false,live:false}];
 const categories=[{title:"SriVerse AI",desc:"Intelligent tools, experiments and AI workspaces.",icon:"✦",key:"AI"},{title:"SriVerse Learn",desc:"Education, UPSC, academic resources and knowledge.",icon:"◇",key:"Education"},{title:"SriVerse Media",desc:"YouTube, podcasts, videos and conversations.",icon:"▶",key:"Media"},{title:"SriVerse Projects",desc:"Websites, software and experimental creations.",icon:"⌘",key:"Projects"},{title:"SriVerse Community",desc:"Temple, village and community initiatives.",icon:"◎",key:"Community"},{title:"SriVerse Resources",desc:"Useful links, documents, tools and references.",icon:"▱",key:"Resources"}];
 const categoryGrid=document.querySelector("#categoryGrid"),featuredGrid=document.querySelector("#featuredGrid"),linkGrid=document.querySelector("#linkGrid"),filters=document.querySelector("#filters"),search=document.querySelector("#search"),empty=document.querySelector("#emptyState");let links=[...fallbackLinks];
 
 function classifyGitHubRepo(repo){
+  const explicit=(repo.topics||[]).map(x=>x.toLowerCase()).find(x=>GITHUB_CATEGORY_TOPICS[x]);
+  if(explicit)return GITHUB_CATEGORY_TOPICS[explicit];
   const text=[repo.name,repo.description||"",...(repo.topics||[])].join(" ").toLowerCase();
   const has=words=>words.some(w=>text.includes(w));
   if(has(["ai","artificial-intelligence","machine-learning","llm","agent","chatbot","deepseek","openai","gemini","rag","neural"]))return"AI";
